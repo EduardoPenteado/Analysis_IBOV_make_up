@@ -56,6 +56,7 @@ class Stocks_Variation:
         print('-'*16)
         for j in range(1, len(df.columns)):
             for i in range(0, len(df)):
+                # Return the searches with at least 95. You can change it.
                 if df.iloc[i][j] >= 95:
                     print(df.loc[i].date.strftime('%d-%m-%Y'), end=' - ')
                     print(df.columns[j])
@@ -65,6 +66,7 @@ class Stocks_Variation:
         df = pd.read_excel('Ibov_Search'+start+'_'+end+'.xlsx')
         soma = [sum(df[i]) for i in df.columns if i != 'date']
         max_ = []
+        # Return the 20 most searched stocks, and you can change it.
         while len(max_) < 20:
             max_total = 0
             for total in soma:
@@ -119,6 +121,7 @@ class Stocks_Variation:
             i += 1
         print('Not Found: '+' - '.join(map(str, error)))
         #Transforming the Data in a DataFrame, which as been sorted descending and return the first 10 most variables.
+        #Return the 15 most variation, you can change it by changing the 15 number on df_pos and df_neg
         df_pos = pd.DataFrame.sort_values(pd.DataFrame(var_pos, columns=['Código', 'Variação']), by="Variação", ascending=False)[0:15]
         df_neg = pd.DataFrame.sort_values(pd.DataFrame(var_neg, columns=['Código', 'Variação']), by='Variação')[0:15]
         print('\nVariação entre '+ price.index[0].strftime("%d/%m/%Y")+' a '+price.index[-1].strftime('%d/%m/%Y'))
